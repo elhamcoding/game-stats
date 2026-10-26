@@ -9,8 +9,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 public class MapGameStatsCalculatorTest {
+@Test
+public void gameCountWithOneGame() {
+    String scoreData = "Elham 15\n";
+    GameStatsCalculator calculator =
+        new MapGameStatsCalculator(new Scanner(scoreData));
 
-  // gameCount tests
+    assertEquals(1, calculator.gameCount("Elham"));
+}
+
+@Test
+public void gameCountIncludesNegativeScores() {
+    String scoreData = "Elham -10\nElham 0\nElham -5\n";
+    GameStatsCalculator calculator =
+        new MapGameStatsCalculator(new Scanner(scoreData));
+
+    assertEquals(3, calculator.gameCount("Elham"));
+}
 
   @Test
   public void gameCountReturnsNumberOfGamesForPerson() {
