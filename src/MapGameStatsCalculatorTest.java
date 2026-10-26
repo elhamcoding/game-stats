@@ -9,6 +9,24 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 public class MapGameStatsCalculatorTest {
+
+  @Test
+public void averageScoreKeepsDecimalPart() {
+    String scoreData = "Elham 10\nElham 11\n";
+    GameStatsCalculator calculator =
+        new MapGameStatsCalculator(new Scanner(scoreData));
+
+    assertEquals(10.5, calculator.getAverageScore("Elham"), 0.0001);
+}
+
+@Test
+public void averageScoreWithNegativeScores() {
+    String scoreData = "Elham -10\nElham -5\n";
+    GameStatsCalculator calculator =
+        new MapGameStatsCalculator(new Scanner(scoreData));
+
+    assertEquals(-7.5, calculator.getAverageScore("Elham"), 0.0001);
+}
   
   @Test
 public void highestScorerWithOnePerson() {
