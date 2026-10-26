@@ -9,6 +9,33 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 public class MapGameStatsCalculatorTest {
+  
+  @Test
+public void highestScorerWithOnePerson() {
+    String scoreData = "Elham 15\nElham 30\n";
+    GameStatsCalculator calculator =
+        new MapGameStatsCalculator(new Scanner(scoreData));
+
+    assertEquals("Elham", calculator.highestScorer());
+}
+
+@Test
+public void highestScorerWithNegativeScores() {
+    String scoreData = "Elham -10\nSara -5\nElham -20\n";
+    GameStatsCalculator calculator =
+        new MapGameStatsCalculator(new Scanner(scoreData));
+
+    assertEquals("Sara", calculator.highestScorer());
+}
+
+@Test
+public void highestScorerBreaksTieAlphabetically() {
+    String scoreData = "Zara 50\nAdam 50\nMila 30\n";
+    GameStatsCalculator calculator =
+        new MapGameStatsCalculator(new Scanner(scoreData));
+
+    assertEquals("Adam", calculator.highestScorer());
+}
 
   @Test
 public void highScoreWithOneGame() {
